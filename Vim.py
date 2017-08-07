@@ -59,17 +59,18 @@ def main():
 		# of the file , we should set it back to 
 		# starting by using seek function
 		f.seek(0)
+		
 		currentPointer = f.tell()
+		
 		print('Current filepointer Position:',currentPointer)
 		change = int(input('\nEnter the number of characters you want to move the pointer: '))
+		
+		#Debugged_by_Yash:Folowing line added to actually move the cursor
+		f.seek(f.tell() + change)
+		
 		text = input('\nEnter the content to be replaced\n: ')
-		#Debugged_by_Yash: len(text was compared with content[change:] instead of its length)
-		#                   so it threw exception and overwrited the file by create()   
-		if len(text) > len(content[change:]):
-			f.write(text)
-		else:
-			move = change+len(text)
-			f.write(content[change:move]+content[move:])
+		#Debugged_by_Yash: no need for if and else statements due to line 69
+		f.write( text )
 	except:
 		create(sys.argv[1])
 
