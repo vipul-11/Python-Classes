@@ -51,6 +51,8 @@ def create(fileName):
 def editFile(fileName):
 	try:
 		f = open(fileName,'r+')
+		# when a file is read, the cursor moves to the end of file
+		# the folowing line sets the cursor to intial position of file.
 		f.seek(0)
 		#while added for multiple edits
 		i = 0
@@ -95,10 +97,10 @@ def main():
 		readFile(fileName)
 		print(color.BOLD + color.OKBLUE+"\nEnter 1 to Edit \n       or\nAnything Else to Exit"+color.ENDC)
 		opt = input()
-			if(opt == "1"):
-				editFile(fileName)
-			else:
-				break
+		if(opt == "1"):
+			editFile(fileName)
+		else:
+			break
 
 if __name__ == '__main__':
 	main()
