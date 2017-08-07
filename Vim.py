@@ -56,7 +56,6 @@ def editFile(fileName):
 		i = 0
 		while(True):
 			os.system("clear")
-			print("Edited:",i)
 			readFile(fileName)
 			print(color.OKBLUE+'Cursor Currently At:' + color.ENDC,(f.tell()))
 			try:
@@ -69,7 +68,8 @@ def editFile(fileName):
 			text = input(color.BOLD+'\nEnter new content\n: '+color.ENDC)
 			#Debugged_by_Yash: no need for if and else statements
 			f.write( text )
-			i += 1
+			#the following sleep provides time to write the file,
+			#else the read statement will display the old file
 			sleep(1)
 	except:
 		print(color.FAIL +"File To Be Read Not Found !" + color.ENDC)
@@ -93,13 +93,12 @@ def main():
 	while(True):
 		os.system("clear")
 		readFile(fileName)
-		print(color.BOLD + color.OKBLUE+"\nEnter 1 to Edit \n       or\nEnter 0 to Exit"+color.ENDC)
+		print(color.BOLD + color.OKBLUE+"\nEnter 1 to Edit \n       or\nAnything Else to Exit"+color.ENDC)
 		opt = input()
-		if(opt != "0"):
-			editFile(fileName)
-		else:
-			break	
-
+			if(opt == "1"):
+				editFile(fileName)
+			else:
+				break
 
 if __name__ == '__main__':
 	main()
