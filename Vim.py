@@ -53,34 +53,38 @@ def editFile(fileName):
 		f = open(fileName,'r+')
 		f.seek(0)
 		#while added for multiple edits
+		i = 0
 		while(True):
-			print(color.OKBLUE+'Current Cursor Position:' + color.ENDC,f.tell())
-			change = int(input(color.BOLD +'\nEnter The Number of Characters You Want To Move The Cursor\n\tor\nEnter 0 to Finish\n: '+color.ENDC))
-			if(change == 0):
+			os.system("clear")
+			print("Edited:",i)
+			readFile(fileName)
+			print(color.OKBLUE+'Cursor Currently At:' + color.ENDC,(f.tell()))
+			try:
+				change = int(input(color.BOLD +'\nEnter The Number of Characters You Want To Move The Cursor\n\tor\nEnter f to Finish\n: '+color.ENDC))
+			except:
 				break
 			#Debugged_by_Yash:Folowing line added to actually move the cursor
-			f.seek(f.tell() + change)
-			
+			f.seek( change + f.tell())
+
 			text = input(color.BOLD+'\nEnter new content\n: '+color.ENDC)
 			#Debugged_by_Yash: no need for if and else statements
 			f.write( text )
-			f.clear()
-			readFile(fileName)
+			i += 1
+			sleep(1)
 	except:
 		print(color.FAIL +"File To Be Read Not Found !" + color.ENDC)
+
 
 def readFile(fileName):
 	try:
 		f = open(fileName,'r')
-		content = f.read()
 		print(color.HEADER+"-----------------"+fileName+"-----------------"+color.ENDC)
-		print(color.OKGREEN + content + color.ENDC)
+		print(color.OKGREEN + f.read() + color.ENDC)
 		print(color.HEADER+"----------------------------------------------\n"+color.ENDC)
 		f.close()
 	except:
 		print(color.WARNING +"File Does Not Exist, Created New File" + color.ENDC)
 		create(fileName)	
-
 
 
 def main():
@@ -89,7 +93,7 @@ def main():
 	while(True):
 		os.system("clear")
 		readFile(fileName)
-		print(color.BOLD + color.OKBLUE+"\nPress 1 to Edit \n       or\nPress 0 to Exit"+color.ENDC)
+		print(color.BOLD + color.OKBLUE+"\nEnter 1 to Edit \n       or\nEnter 0 to Exit"+color.ENDC)
 		opt = input()
 		if(opt != "0"):
 			editFile(fileName)
