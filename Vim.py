@@ -55,7 +55,7 @@ def editFile(fileName):
 		# the folowing line sets the cursor to intial position of file.
 		f.seek(0)
 		#while added for multiple edits
-		i = 0
+		
 		while(True):
 			os.system("clear")
 			readFile(fileName)
@@ -90,17 +90,20 @@ def readFile(fileName):
 
 
 def main():
-	splashScreen()
-	fileName = sys.argv[1]
-	while(True):
-		os.system("clear")
-		readFile(fileName)
-		print(color.BOLD + color.OKBLUE+"\nEnter 1 to Edit \n       or\nAnything Else to Exit"+color.ENDC)
-		opt = input()
-		if(opt == "1"):
-			editFile(fileName)
-		else:
-			break
+	try:
+		fileName = sys.argv[1]
+		splashScreen()
+		while(True):
+			os.system("clear")
+			readFile(fileName)
+			print(color.BOLD + color.OKBLUE+"\nEnter 1 to Edit \n       or\nAnything Else to Exit"+color.ENDC)
+			opt = input()
+			if(opt == "1"):
+				editFile(fileName)
+			else:
+				break
+	except:
+		print(color.FAIL +"Please Enter a FileName !" + color.ENDC)
 
 if __name__ == '__main__':
 	main()
